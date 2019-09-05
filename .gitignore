@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ShoppingCartBL/bin/Debug
+/ShoppingCartBL/obj/Debug
+/ShoppingCartDAL/bin/Debug
+/ShoppingCartDAL/obj/Debug
+/ShoppingCartEL/bin/Debug
+/ShoppingCartEL/obj/Debug
+/ShoppingCartWebApi/bin
+/ShoppingCartWebApi/obj/Debug
+/.vs

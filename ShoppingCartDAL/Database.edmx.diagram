@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d1fb55b888764fcd9a92ad7bf13c42ab" Name="Diagram1">
+        <EntityTypeShape EntityType="ShoppingCartModel.Cart" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Cart_Product_Mapping" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Category" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Category_Product_Mapping" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.CategoryFeature" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Payment" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Product" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Product_Feature_Details" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Rating" Width="1.5" PointX="8" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Review" Width="1.5" PointX="10.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Shipping" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.ShippingDetail" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.ShippingStatu" Width="1.5" PointX="10.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingCartModel.UserTable" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Cart__UserId__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Cart_Prod__CartI__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Payment__CartId__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Shipping__CartId__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Cart_Prod__Produ__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Category___Categ__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__CategoryF__Categ__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Category___Produ__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Product_F__Featu__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Payment__Shippin__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Payment__UserId__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Product_F__Produ__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Rating__ProductI__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Rating__UserId__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Reviews__RatingI__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__Shipping__UserId__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__ShippingS__Shipp__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingCartModel.FK__ShippingD__UserI__33D4B598" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

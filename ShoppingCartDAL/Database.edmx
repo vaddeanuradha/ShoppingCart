@@ -1,0 +1,1153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ShoppingCartModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cart_Product_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartId" Type="uniqueidentifier" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Quatity" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpadatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Category_Product_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="CategoryFeatures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="CartId" Type="uniqueidentifier" />
+          <Property Name="ShippingId" Type="int" />
+          <Property Name="PaymentReceived" Type="money" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product_Feature_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="FeatureId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RatingId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="CartId" Type="uniqueidentifier" />
+          <Property Name="IsCompleted" Type="bit" />
+          <Property Name="IsCancelled" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShippingDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="DoorNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="Area" Type="nvarchar" MaxLength="100" />
+          <Property Name="Landmark" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ShippingStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShippingId" Type="int" />
+          <Property Name="StatusDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Cart__UserId__2D27B809">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart_Prod__CartI__300424B4">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Cart_Product_Mapping" Type="Self.Cart_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart_Product_Mapping">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart_Prod__Produ__30F848ED">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Cart_Product_Mapping" Type="Self.Cart_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart_Product_Mapping">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category___Categ__2A4B4B5E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category_Product_Mapping" Type="Self.Category_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Product_Mapping">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category___Produ__29572725">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Category_Product_Mapping" Type="Self.Category_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Product_Mapping">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryF__Categ__48CFD27E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CategoryFeatures" Type="Self.CategoryFeatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryFeatures">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__CartId__3E52440B">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Shippin__3F466844">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="ShippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__UserId__3D5E1FD2">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_F__Featu__4CA06362">
+          <End Role="CategoryFeatures" Type="Self.CategoryFeatures" Multiplicity="0..1" />
+          <End Role="Product_Feature_Details" Type="Self.Product_Feature_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryFeatures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_Feature_Details">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_F__Produ__4BAC3F29">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Feature_Details" Type="Self.Product_Feature_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_Feature_Details">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rating__ProductI__4316F928">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rating__UserId__4222D4EF">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reviews__RatingI__45F365D3">
+          <End Role="Rating" Type="Self.Rating" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rating">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="RatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipping__CartId__37A5467C">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipping__UserId__36B12243">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShippingD__UserI__33D4B598">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="ShippingDetails" Type="Self.ShippingDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShippingS__Shipp__3A81B327">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="0..1" />
+          <End Role="ShippingStatus" Type="Self.ShippingStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingStatus">
+              <PropertyRef Name="ShippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShoppingCartModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart_Product_Mapping" EntityType="Self.Cart_Product_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Product_Mapping" EntityType="Self.Category_Product_Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryFeatures" EntityType="Self.CategoryFeatures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Feature_Details" EntityType="Self.Product_Feature_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingDetails" EntityType="Self.ShippingDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingStatus" EntityType="Self.ShippingStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cart__UserId__2D27B809" Association="Self.FK__Cart__UserId__2D27B809">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart_Prod__CartI__300424B4" Association="Self.FK__Cart_Prod__CartI__300424B4">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Cart_Product_Mapping" EntitySet="Cart_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart_Prod__Produ__30F848ED" Association="Self.FK__Cart_Prod__Produ__30F848ED">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cart_Product_Mapping" EntitySet="Cart_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category___Categ__2A4B4B5E" Association="Self.FK__Category___Categ__2A4B4B5E">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Product_Mapping" EntitySet="Category_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category___Produ__29572725" Association="Self.FK__Category___Produ__29572725">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Category_Product_Mapping" EntitySet="Category_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryF__Categ__48CFD27E" Association="Self.FK__CategoryF__Categ__48CFD27E">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryFeatures" EntitySet="CategoryFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__CartId__3E52440B" Association="Self.FK__Payment__CartId__3E52440B">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Shippin__3F466844" Association="Self.FK__Payment__Shippin__3F466844">
+            <End Role="Shipping" EntitySet="Shipping" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__UserId__3D5E1FD2" Association="Self.FK__Payment__UserId__3D5E1FD2">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_F__Featu__4CA06362" Association="Self.FK__Product_F__Featu__4CA06362">
+            <End Role="CategoryFeatures" EntitySet="CategoryFeatures" />
+            <End Role="Product_Feature_Details" EntitySet="Product_Feature_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_F__Produ__4BAC3F29" Association="Self.FK__Product_F__Produ__4BAC3F29">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_Feature_Details" EntitySet="Product_Feature_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rating__ProductI__4316F928" Association="Self.FK__Rating__ProductI__4316F928">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rating__UserId__4222D4EF" Association="Self.FK__Rating__UserId__4222D4EF">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reviews__RatingI__45F365D3" Association="Self.FK__Reviews__RatingI__45F365D3">
+            <End Role="Rating" EntitySet="Rating" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__CartId__37A5467C" Association="Self.FK__Shipping__CartId__37A5467C">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Shipping" EntitySet="Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__UserId__36B12243" Association="Self.FK__Shipping__UserId__36B12243">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Shipping" EntitySet="Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShippingD__UserI__33D4B598" Association="Self.FK__ShippingD__UserI__33D4B598">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="ShippingDetails" EntitySet="ShippingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShippingS__Shipp__3A81B327" Association="Self.FK__ShippingS__Shipp__3A81B327">
+            <End Role="Shipping" EntitySet="Shipping" />
+            <End Role="ShippingStatus" EntitySet="ShippingStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShoppingCartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK__Cart__UserId__2D27B809" FromRole="Cart" ToRole="UserTable" />
+          <NavigationProperty Name="Cart_Product_Mapping" Relationship="Self.FK__Cart_Prod__CartI__300424B4" FromRole="Cart" ToRole="Cart_Product_Mapping" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__CartId__3E52440B" FromRole="Cart" ToRole="Payment" />
+          <NavigationProperty Name="Shippings" Relationship="Self.FK__Shipping__CartId__37A5467C" FromRole="Cart" ToRole="Shipping" />
+        </EntityType>
+        <EntityType Name="Cart_Product_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartId" Type="Guid" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quatity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpadatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK__Cart_Prod__CartI__300424B4" FromRole="Cart_Product_Mapping" ToRole="Cart" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Cart_Prod__Produ__30F848ED" FromRole="Cart_Product_Mapping" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Category_Product_Mapping" Relationship="Self.FK__Category___Categ__2A4B4B5E" FromRole="Category" ToRole="Category_Product_Mapping" />
+          <NavigationProperty Name="CategoryFeatures" Relationship="Self.FK__CategoryF__Categ__48CFD27E" FromRole="Category" ToRole="CategoryFeatures" />
+        </EntityType>
+        <EntityType Name="Category_Product_Mapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Category___Categ__2A4B4B5E" FromRole="Category_Product_Mapping" ToRole="Category" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Category___Produ__29572725" FromRole="Category_Product_Mapping" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="CategoryFeature">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__CategoryF__Categ__48CFD27E" FromRole="CategoryFeatures" ToRole="Category" />
+          <NavigationProperty Name="Product_Feature_Details" Relationship="Self.FK__Product_F__Featu__4CA06362" FromRole="CategoryFeatures" ToRole="Product_Feature_Details" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="CartId" Type="Guid" />
+          <Property Name="ShippingId" Type="Int32" />
+          <Property Name="PaymentReceived" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK__Payment__CartId__3E52440B" FromRole="Payment" ToRole="Cart" />
+          <NavigationProperty Name="Shipping" Relationship="Self.FK__Payment__Shippin__3F466844" FromRole="Payment" ToRole="Shipping" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK__Payment__UserId__3D5E1FD2" FromRole="Payment" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart_Product_Mapping" Relationship="Self.FK__Cart_Prod__Produ__30F848ED" FromRole="Product" ToRole="Cart_Product_Mapping" />
+          <NavigationProperty Name="Category_Product_Mapping" Relationship="Self.FK__Category___Produ__29572725" FromRole="Product" ToRole="Category_Product_Mapping" />
+          <NavigationProperty Name="Product_Feature_Details" Relationship="Self.FK__Product_F__Produ__4BAC3F29" FromRole="Product" ToRole="Product_Feature_Details" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK__Rating__ProductI__4316F928" FromRole="Product" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Product_Feature_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="FeatureId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CategoryFeature" Relationship="Self.FK__Product_F__Featu__4CA06362" FromRole="Product_Feature_Details" ToRole="CategoryFeatures" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product_F__Produ__4BAC3F29" FromRole="Product_Feature_Details" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Rating1" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Rating__ProductI__4316F928" FromRole="Rating" ToRole="Product" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK__Rating__UserId__4222D4EF" FromRole="Rating" ToRole="UserTable" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK__Reviews__RatingI__45F365D3" FromRole="Rating" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RatingId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Rating" Relationship="Self.FK__Reviews__RatingI__45F365D3" FromRole="Reviews" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="CartId" Type="Guid" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="IsCancelled" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK__Shipping__CartId__37A5467C" FromRole="Shipping" ToRole="Cart" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Shippin__3F466844" FromRole="Shipping" ToRole="Payment" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK__Shipping__UserId__36B12243" FromRole="Shipping" ToRole="UserTable" />
+          <NavigationProperty Name="ShippingStatus" Relationship="Self.FK__ShippingS__Shipp__3A81B327" FromRole="Shipping" ToRole="ShippingStatus" />
+        </EntityType>
+        <EntityType Name="ShippingDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="DoorNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Landmark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="UserTable" Relationship="Self.FK__ShippingD__UserI__33D4B598" FromRole="ShippingDetails" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="ShippingStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShippingId" Type="Int32" />
+          <Property Name="StatusDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Shipping" Relationship="Self.FK__ShippingS__Shipp__3A81B327" FromRole="ShippingStatus" ToRole="Shipping" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__UserId__2D27B809" FromRole="UserTable" ToRole="Cart" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__UserId__3D5E1FD2" FromRole="UserTable" ToRole="Payment" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK__Rating__UserId__4222D4EF" FromRole="UserTable" ToRole="Rating" />
+          <NavigationProperty Name="Shippings" Relationship="Self.FK__Shipping__UserId__36B12243" FromRole="UserTable" ToRole="Shipping" />
+          <NavigationProperty Name="ShippingDetails" Relationship="Self.FK__ShippingD__UserI__33D4B598" FromRole="UserTable" ToRole="ShippingDetails" />
+        </EntityType>
+        <Association Name="FK__Cart__UserId__2D27B809">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart_Prod__CartI__300424B4">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Cart_Product_Mapping" Type="Self.Cart_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart_Product_Mapping">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__CartId__3E52440B">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipping__CartId__37A5467C">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="CartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart_Prod__Produ__30F848ED">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Cart_Product_Mapping" Type="Self.Cart_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cart_Product_Mapping">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category___Categ__2A4B4B5E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category_Product_Mapping" Type="Self.Category_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Product_Mapping">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryF__Categ__48CFD27E">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CategoryFeatures" Type="Self.CategoryFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryFeatures">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Category___Produ__29572725">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Category_Product_Mapping" Type="Self.Category_Product_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category_Product_Mapping">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_F__Featu__4CA06362">
+          <End Role="CategoryFeatures" Type="Self.CategoryFeature" Multiplicity="0..1" />
+          <End Role="Product_Feature_Details" Type="Self.Product_Feature_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryFeatures">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_Feature_Details">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Shippin__3F466844">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="ShippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__UserId__3D5E1FD2">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product_F__Produ__4BAC3F29">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product_Feature_Details" Type="Self.Product_Feature_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product_Feature_Details">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rating__ProductI__4316F928">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rating__UserId__4222D4EF">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reviews__RatingI__45F365D3">
+          <End Role="Rating" Type="Self.Rating" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rating">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="RatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shipping__UserId__36B12243">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShippingS__Shipp__3A81B327">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="0..1" />
+          <End Role="ShippingStatus" Type="Self.ShippingStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingStatus">
+              <PropertyRef Name="ShippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShippingD__UserI__33D4B598">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="ShippingDetails" Type="Self.ShippingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShippingDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SCADatabase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="Cart_Product_Mapping" EntityType="Self.Cart_Product_Mapping" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Category_Product_Mapping" EntityType="Self.Category_Product_Mapping" />
+          <EntitySet Name="CategoryFeatures" EntityType="Self.CategoryFeature" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Product_Feature_Details" EntityType="Self.Product_Feature_Details" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Shippings" EntityType="Self.Shipping" />
+          <EntitySet Name="ShippingDetails" EntityType="Self.ShippingDetail" />
+          <EntitySet Name="ShippingStatus" EntityType="Self.ShippingStatu" />
+          <EntitySet Name="UserTables" EntityType="Self.UserTable" />
+          <AssociationSet Name="FK__Cart__UserId__2D27B809" Association="Self.FK__Cart__UserId__2D27B809">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart_Prod__CartI__300424B4" Association="Self.FK__Cart_Prod__CartI__300424B4">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Cart_Product_Mapping" EntitySet="Cart_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__CartId__3E52440B" Association="Self.FK__Payment__CartId__3E52440B">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__CartId__37A5467C" Association="Self.FK__Shipping__CartId__37A5467C">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Shipping" EntitySet="Shippings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart_Prod__Produ__30F848ED" Association="Self.FK__Cart_Prod__Produ__30F848ED">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Cart_Product_Mapping" EntitySet="Cart_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category___Categ__2A4B4B5E" Association="Self.FK__Category___Categ__2A4B4B5E">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_Product_Mapping" EntitySet="Category_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryF__Categ__48CFD27E" Association="Self.FK__CategoryF__Categ__48CFD27E">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryFeatures" EntitySet="CategoryFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Category___Produ__29572725" Association="Self.FK__Category___Produ__29572725">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Category_Product_Mapping" EntitySet="Category_Product_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_F__Featu__4CA06362" Association="Self.FK__Product_F__Featu__4CA06362">
+            <End Role="CategoryFeatures" EntitySet="CategoryFeatures" />
+            <End Role="Product_Feature_Details" EntitySet="Product_Feature_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Shippin__3F466844" Association="Self.FK__Payment__Shippin__3F466844">
+            <End Role="Shipping" EntitySet="Shippings" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__UserId__3D5E1FD2" Association="Self.FK__Payment__UserId__3D5E1FD2">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product_F__Produ__4BAC3F29" Association="Self.FK__Product_F__Produ__4BAC3F29">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Feature_Details" EntitySet="Product_Feature_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rating__ProductI__4316F928" Association="Self.FK__Rating__ProductI__4316F928">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rating__UserId__4222D4EF" Association="Self.FK__Rating__UserId__4222D4EF">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reviews__RatingI__45F365D3" Association="Self.FK__Reviews__RatingI__45F365D3">
+            <End Role="Rating" EntitySet="Ratings" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__UserId__36B12243" Association="Self.FK__Shipping__UserId__36B12243">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Shipping" EntitySet="Shippings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShippingS__Shipp__3A81B327" Association="Self.FK__ShippingS__Shipp__3A81B327">
+            <End Role="Shipping" EntitySet="Shippings" />
+            <End Role="ShippingStatus" EntitySet="ShippingStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShippingD__UserI__33D4B598" Association="Self.FK__ShippingD__UserI__33D4B598">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="ShippingDetails" EntitySet="ShippingDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShoppingCartModelStoreContainer" CdmEntityContainer="SCADatabase">
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart_Product_Mapping">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Cart_Product_Mapping">
+              <MappingFragment StoreEntitySet="Cart_Product_Mapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quatity" ColumnName="Quatity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpadatedDate" ColumnName="UpadatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Product_Mapping">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Category_Product_Mapping">
+              <MappingFragment StoreEntitySet="Category_Product_Mapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryFeatures">
+            <EntityTypeMapping TypeName="ShoppingCartModel.CategoryFeature">
+              <MappingFragment StoreEntitySet="CategoryFeatures">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="PaymentReceived" ColumnName="PaymentReceived" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Feature_Details">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Product_Feature_Details">
+              <MappingFragment StoreEntitySet="Product_Feature_Details">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Rating1" ColumnName="Rating" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippings">
+            <EntityTypeMapping TypeName="ShoppingCartModel.Shipping">
+              <MappingFragment StoreEntitySet="Shipping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingDetails">
+            <EntityTypeMapping TypeName="ShoppingCartModel.ShippingDetail">
+              <MappingFragment StoreEntitySet="ShippingDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DoorNumber" ColumnName="DoorNumber" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingStatus">
+            <EntityTypeMapping TypeName="ShoppingCartModel.ShippingStatu">
+              <MappingFragment StoreEntitySet="ShippingStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="StatusDateTime" ColumnName="StatusDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTables">
+            <EntityTypeMapping TypeName="ShoppingCartModel.UserTable">
+              <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
