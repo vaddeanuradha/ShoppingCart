@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="../../assets/Images/{{productDetails.Id}}.jpg" class="img" style="width:350px;"/>
+    </div>
+    <div class="col-sm-8">
+      <div  class="descriptionBox"> 
+        <h3>{{productDetails.Name}}</h3>
+        <div><p>{{productDetails.Description}}</p></div>
+        <div><span style="color:gray">Price:</span>{{productDetails.Price|currency:"USD":true}}</div>
+        <div>
+          <div class="col-sm-06"><button class="btn btn-warning btn-block" style="margin-right:25px">Add to Cart</button></div>
+          <div class="col-sm-06"><button class="btn btn-warning btn-block">Buy</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<style>
+  .descriptionBox
+  {
+    border-style:solid;
+    border-color: lightgray;
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+
+  }
+</style>

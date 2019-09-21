@@ -1,0 +1,23 @@
+<div class ="container">
+     <div class="row">
+       <div class="col-sm-3" style="padding:2% 2% 2% 2%" *ngFor="let product of ProductList">
+        <a class="card" routerLink="/productDetails/{{product.Id}}"> 
+        <img src="./../../assets/Images/{{product.Id}}.jpg" class="card-image-top"  style="height:200px; padding: 2% 4% 2% 4%"/>
+         <div class="card-body-">
+           <div>{{product.Name}}</div>
+           <div class="clo-sm-4">{{product.Price|currency:"USD":true}}</div>
+           <button class="btn btn-warning">Add to Cart</button>
+          </div> 
+        </a>
+      </div>
+     </div>
+</div>
+<style>
+  .card:hover
+  {
+    box-shadow: black;
+    background-color:rgb(57, 102, 102) 
+  }
+
+</style>
+

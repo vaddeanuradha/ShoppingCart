@@ -1,0 +1,14 @@
+<span class="dropdown" categoryDropDown>
+<span class="dropdown-toggle" style="padding-left:30px" data-toggle="dropdown">Category</span>
+<ul class="dropdown-menu" style="padding-left:40px;background-color:black;color:white">
+  <li role="presentation" *ngFor="let category of CategoryList">
+    <a role="menuitem" routerLink="/Product/{{category.Id}}" style="text-decoration:none;color:white" >{{category.CategoryName}}</a>
+  </li>
+</ul>
+</span>  
+ <style>
+     .categoryDropDown
+     {
+       
+     }
+ </style>
